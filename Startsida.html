@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Document</title>
+    <script src="https://cdn.rawgit.com/HGustavs/Shaker.js/master/shaker.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.min.js"> </script>
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script>
+       var swipepage=0;
+      function showpage(pageidin,animin,pageidout,animout,page)
+      {
+          swipepage=page;  
+          document.getElementById(pageidin).style.animation=animin+" 1s ease-in-out 0s 1 forwards";
+          document.getElementById(pageidout).style.animation=animout+" 1s ease-in-out 0s 1 forwards";
+      }
+  
+      function swipe(direction)
+      {
+          if(swipepage==0){
+              if(direction==1){
+                  showpage('page2','in','page1','out',1);
+              }else{
+                  showpage('page4','in','page1','out',3);    
+              }
+          }else if(swipepage==1){
+              if(direction==1){
+                  showpage('page3','in','page2','out',2);
+              }else{
+                  showpage('page1','in','page2','out',0);
+              }
+          }else if(swipepage==2){
+              if(direction==1){
+                  showpage('page4','in','page3','out',3);
+              }else{
+                  showpage('page2','in','page3','out',1);
+              }
+          }else if(swipepage==3){
+              if(direction==1){
+                  showpage('page1','in','page4','out',0);
+              }else{
+                  showpage('page3','in','page4','out',2);
+              }
+          }
+      }
+ 
+      function init(){
+          var element = document.getElementById("pageclicker");
+          var hammertime = Hammer(element);
+          hammertime.on("swiperight", function(event) { swipe(-1); });    
+          hammertime.on("swipeleft", function(event) { swipe(1); });    
+      }
+    </script>
+    <style>
+              .page{position:absolute;width:100%;height:50%;z-index:200;opacity:0; margin:auto;}  
+        #page1 { opacity: 1;}
+      .clicker{position:absolute;left:0px;width:100%;top:35%;height:30%;z-index:600;border:1px; display:flex;justify-content:space-between;align-items:center;}
+      .leftclicker{font-size:0px; }
+    .rightclicker{font-size:0px; }
+ 
+      @keyframes in {0% { opacity: 0; z-index:200; } 100% { opacity: 1; z-index:300; } }    
+      @keyframes out {0% { opacity: 1; z-index:300; } 100% { opacity: 0; z-index:200; } }  
+         figure{
+            text-align: center;
+  
+        }
+        h2 {
+           text-align: center; 
+            font-family: 'Roboto', sans-serif;
+        }
+        @media screen and (orientation:landscape) {
+            img{
+                width: 100%;
+            }
+            
+            
+        }
+           body{
+            background-color: #e2f1f8;
+            
+        }
+          h1{
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body onload="init();">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bio</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active " href="#">Startsida <span class="sr-only">(current)</span> </a>
+      <a class="nav-item nav-link  " href="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/mobilapplikation.html">Film bokningen 
+      
+      <a class="nav-item nav-link  " href="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/popcorn.html">Popcorn</a>  </a>
+    </div>
+  </div>
+</nav>
+              <h1> Välkommen till bio applikationen! </h1>
+              <h2> Swipa genom våra senaste filmer!</h2>
+               <div class="rader"> 
+             <div id="pageclicker" class="clicker">
+              <div class="leftclicker" onclick="swipe(-1)">&lt;</div>
+              <div class="rightclicker" onclick="swipe(1)">&gt;</div>
+          </div>
+          <div id="page1" class="page">
+              <figure>
+                 <img src="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/Nystarwars1.jpg">
+                 <figcaption> <a href="https://creativecommons.org/licenses/by-sa/3.0/"> Solo: A Star Wars Story, CC BY-SA 3.0</a></figcaption>
+              </figure>
+          </div>
+          <div id="page2" class="page">
+                <figure>
+                <img src="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/Nystarwars3.jpg">
+                 <figcaption> <a href="https://creativecommons.org/share-your-work/public-domain/"> Rogue One: A Star Wars Story Public domain</a></figcaption>
+              </figure>
+          </div>
+          <div id="page3" class="page">
+                <figure>
+                  <img src="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/nyspiderman.jpg">
+                  <figcaption> <a href="https://creativecommons.org/licenses/by-sa/3.0/"> The Amazing Spider-Man 2: Rise of Electro, CC BY-SA 3.0</a></figcaption>
+              </figure>
+          </div>
+          <div id="page4" class="page">
+                <figure>
+                 <img src="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/nybatman1.jpg">
+                   <figcaption> <a href="https://creativecommons.org/share-your-work/public-domain/"> The Dark Knight Rises, Public domain</a></figcaption>
+              </figure>
+          </div>
+   
+</div>
+    
+</body>
+</html>

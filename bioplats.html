@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <title>Bioplats</title>
+</head>
+    <style>
+        .container {
+            width:500px;
+            height: 800px;
+            
+        }
+            
+            #printout2 {
+            display: inline-block;
+            padding: 20px;
+            font-size: 24px;
+            background-color: #def;
+            border: 1px solid blue;
+        }
+
+        #bild  {
+            overflow: hidden;
+            
+            width: 360px;
+            height: 800px;
+            
+
+        }
+                #bild img {
+            
+            position: absolute;
+            
+            left: -650px;
+
+        }
+        
+    </style>
+     <script src="https://cdn.rawgit.com/HGustavs/Shaker.js/master/shaker.js"></script>
+    <script>
+        var offset= -0;
+        // Make events 
+        function initShaker() {
+
+            var cx = 0;
+            var cy = 0;
+
+            shaker.on("tilt", function(o) {
+                var div = document.getElementById("printout2");
+
+                var vinkel = o.alpha;
+                vinkel = vinkel  -180 ;
+              
+                 vinkel = vinkel /1 ;
+
+               
+            //    div.innerHTML = "Alpha:" + o.alpha + " vinkel:"+vinkel;
+
+                var bilden = document.getElementById("biobild")
+                bilden.style.left = Math.round(vinkel) + offset + "px";
+            
+            });
+
+        }
+
+    </script>
+<body onload="initShaker();">
+<a href="mobilapplikation.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Tillbaka till bioplatsen</a>
+    <div class="container"> 
+     
+    <div id="bild"> <img id="biobild" src="http://wwwlab.iit.his.se/a18abuah/projekt/Mobilapplikation%20projekt/Stora%20bio%20bilden.jpg"></div>
+    </div>
+    
+</body>
+</html>
